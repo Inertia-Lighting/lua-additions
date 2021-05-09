@@ -156,6 +156,7 @@ function Table.reverse(tbl)
 end
 
 --- Prepends the values from tableToPrepend into tbl
+--- @notice (this method mutates the original table)
 --- @param tbl table
 --- @param tableToPrepend table
 --- @returns tbl table
@@ -172,6 +173,7 @@ function Table.prepend(tbl, tableToPrepend)
 end
 
 --- Appends the values from tableToAppend into tbl
+--- @notice (this method mutates the original table)
 --- @param tbl table
 --- @param tableToAppend table
 --- @returns tbl table
