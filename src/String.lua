@@ -38,6 +38,26 @@ function String.trim(str)
     return trimmed
 end
 
+--- Returns the character found at the specified index
+--- @param str string
+--- @param index number
+--- @returns char string
+function String.charAt(str, index)
+    local char = string.sub(str, index, index)
+
+    return char
+end
+
+--- Returns the character code of the character found at the specified index
+--- @param str string
+--- @param index number
+--- @returns charCode number
+function String.charCodeAt(str, index)
+    local charCode = string.byte(string.sub(str, index, index))
+
+    return charCode
+end
+
 --- Splits a string by a separator (example: ',') into a table containing substrings
 --- @param str string
 --- @param separator string
