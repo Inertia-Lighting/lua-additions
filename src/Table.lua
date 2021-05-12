@@ -40,54 +40,48 @@ function Table.slice(tbl, startIndex, endIndex)
     return sliced
 end
 
---- Iterates over a table providing a callback function to alter each value
+--- Iterates over a table providing a callback to alter each value in the returned table
 --- @param tbl table
---- @param callback function callback(value, key, tbl)
+--- @param callback function callback(value, key, index, tbl)
 --- @returns mapped table
 function Table.map(tbl, callback)
     local mapped = {}
 
+    local index = 1
     for key, value in pairs(tbl) do
-        mapped[key] = callback(value, key, tbl)
+        mapped[key] = callback(value, key, index, tbl)
+        index = index + 1
     end
 
     return mapped
 end
 
---- Iterates over a table to reduce it to a single value by providing a callback function to alter an accumulated value
+--- Iterates over a table to reduce it to a single value by providing a callback to alter an accumulated value
 --- @param tbl table
---- @param callback function callback(accumulator, value, index, tbl)
+--- @param callback function callback(accumulator, value, key, index, tbl)
 --- @param initialValue any forces an initial value for the accumulator
 --- @returns accumulator any
 function Table.reduce(tbl, callback, initialValue)
     local accumulator = initialValue or nil
 
-    for index, value in ipairs(tbl) do
-        accumulator = (index == 1 and initialValue == nil) and value or callback(accumulator, value, index, tbl)
+    local index = 1
+    for key, value in pairs(tbl) do
+        accumulator = (index == 1 and initialValue == nil) and value or callback(accumulator, value, key, index, tbl)
+        index = index + 1
     end
 
     return accumulator
 end
 
---- Iterates over a table's values and indexes
+--- Iterates over a table's values, keys, and indexes
 --- @param tbl table
---- @param callback function callback(value, index, tbl)
+--- @param callback function callback(value, key, index, tbl)
 --- @returns tbl table
-function Table.forEachIndex(tbl, callback)
-    for index, value in ipairs(tbl) do
-        callback(value, index, tbl)
-    end
-
-    return tbl
-end
-
---- Iterates over a table's values and keys
---- @param tbl table
---- @param callback function callback(value, key, tbl)
---- @returns tbl table
-function Table.forEachKey(tbl, callback)
+function Table.forEach(tbl, callback)
+    local index = 1
     for key, value in pairs(tbl) do
-        callback(value, key, tbl)
+        callback(value, key, index, tbl)
+        index = index + 1
     end
 
     return tbl
