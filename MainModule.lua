@@ -2,9 +2,9 @@ local LuaAdditions = {}
 
 ---------------------------------------------------------------
 
-LuaAdditions.Table = require(script.parent.src.Table)
+LuaAdditions.Table = require(script.Parent.src.Table)
 
-LuaAdditions.String = require(script.parent.src.String)
+LuaAdditions.String = require(script.Parent.src.String)
 
 ---------------------------------------------------------------
 

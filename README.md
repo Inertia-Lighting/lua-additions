@@ -13,6 +13,30 @@
 ```lua
 -- some script
 local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
+
+local mathProblems = {
+    add = { 24, 3, 5, 7 },
+    subtract = { 24, 3, 5, 7 },
+}
+
+local solvedMathProblems = LA.Table.map(mathProblems, function(mathProblemValues, mathProblemType)
+    return LA.Table.reduce(mathProblemValues, function(accumulatorValue, currentValue)
+        if mathProblemType == 'add' then
+            return accumulatorValue + currentValue
+        elseif mathProblemType == 'subtract' then
+            return accumulatorValue - currentValue
+        else
+            warn('Encountered an unrecognized math problem type!')
+        end
+    end)
+end)
+
+print(solvedMathProblems)
+
+-- solvedMathProblems = {
+--     add = 39,
+--     subtract = 9,
+-- }
 ```
 
 ## License
