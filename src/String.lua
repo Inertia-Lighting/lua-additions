@@ -81,26 +81,36 @@ function String.split(str, separator)
 
     local charsIndex = 1
     while charsIndex <= #chars do
-        local separatorSegment = ''
         local charsSegment = ''
-        for separatorIndex = 1, #separator do
-            local char = chars[charsIndex]
+
+        local separatorIndex = 1
+        while separatorIndex <= #separator do
+            local char = chars[charsIndex + separatorIndex - 1]
+
+            local currentSplitValue = split[currentSplitIndex] or ''
+
+            if separatorIndex > 1 and not char then
+                split[currentSplitIndex] = currentSplitValue .. charsSegment
+                break
+            end
 
             charsSegment = charsSegment .. char
-            separatorSegment = string.sub(separator, 1, separatorIndex)
+            local separatorSegment = string.sub(separator, 1, separatorIndex)
 
             if charsSegment ~= separatorSegment then
-                split[currentSplitIndex] = (split[currentSplitIndex] or '') .. char
+                split[currentSplitIndex] = currentSplitValue .. char
                 break
             end
 
             if charsSegment == separator then
-                split[currentSplitIndex] = (split[currentSplitIndex] or '')
+                split[currentSplitIndex] = currentSplitValue
                 currentSplitIndex = currentSplitIndex + 1
             end
+
+            separatorIndex = separatorIndex + 1
         end
 
-        if charsIndex == #chars and charsSegment == separator then
+        if charsIndex + #charsSegment >= #chars and charsSegment == separator then
             split[#split + 1] = ''
         end
 
