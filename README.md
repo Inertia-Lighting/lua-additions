@@ -2,12 +2,12 @@
 
 ## About
 
-### This library aims to provide a cross-platform enhancement for Lua's standard library.
-### Although this library is intended for cross-platform usage, it is ready to use (with little modifications) inside of Roblox.
+### This library aims to provide enhancements for Roblox and Lua's standard library.
+### This library is ready to use (with little modifications) inside of Roblox.
 ### Most of the methods in this library are directly inspired by the TC39 ECMAScript (JavaScript) standard.
 
 ## Example Usage for Roblox
-### Currently we have not released a major version of this repository, therefore you must download the repository into a folder in your game called 'lua-additions'.
+### Currently we have not released a require-able asset for this repository, therefore you must download this repository into your game, into a folder called `lua-additions`.
 ```lua
 -- some script
 local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
