@@ -2,7 +2,7 @@
 -- Calling this script will run various tests to ensure that this library is working properly
 --------------------------------------------------------------------------------------------------------------------------------
 
-local LA = require(script.Parent.MainModule)
+local LA = require(script.Parent.Parent.MainModule)
 
 --------------------------------------------------------------------------------------------------------------------------------
 -- Testing LA.String
