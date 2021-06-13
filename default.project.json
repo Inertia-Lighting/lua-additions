@@ -4,6 +4,7 @@
     "$className": "DataModel",
 
     "Workspace": {
+      "$className": "Workspace",
       "$properties": {
         "FilteringEnabled": true
       },
