@@ -6,15 +6,17 @@
 ### This library is ready to use (with little modifications) inside of Roblox.
 ### Most of the methods in this library are directly inspired by the TC39 ECMAScript (JavaScript) standard.
 
+## Notice
+### Currently we have not released a require-able asset for this repository, therefore you must download this repository and use a tool called Rojo to use it Roblox.
+
 ## Example Usage for Roblox
-### Currently we have not released a require-able asset for this repository, therefore you must download this repository into your game, into a folder called `lua-additions`.
 ```lua
 -- some script
-local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
+local LA = require(game.Workspace:WaitForChild('lua-additions').MainModule)
 
 local mathProblems = {
-    add = { 24, 3, 5, 7 },
-    subtract = { 24, 3, 5, 7 },
+    add = { 24, 3, 5, 7 }, -- goal: add all of the numbers
+    subtract = { 24, 3, 5, 7 }, -- goal: subtract all of the numbers
 }
 
 local solvedMathProblems = LA.Table.map(mathProblems, function(mathProblemValues, mathProblemType)
@@ -29,12 +31,24 @@ local solvedMathProblems = LA.Table.map(mathProblems, function(mathProblemValues
     end)
 end)
 
-print(solvedMathProblems)
+print('solvedMathProblems:', solvedMathProblems)
 
--- solvedMathProblems = {
+-- solvedMathProblems: {
 --     add = 39,
 --     subtract = 9,
 -- }
+```
+
+## Example Testing for Roblox
+```lua
+-- some script
+local luaAdditionsTestsWereSuccessful = require(game.Workspace:WaitForChild('lua-additions').tests.tests)
+
+print('luaAdditionsTestsWereSuccessful:', luaAdditionsTestsWereSuccessful)
+
+-- luaAdditionsTestsWereSuccessful: true
+--  or
+-- luaAdditionsTestsWereSuccessful: false
 ```
 
 ## License

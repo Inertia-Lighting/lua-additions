@@ -1,0 +1,24 @@
+{
+  "name": "lua-additions",
+  "tree": {
+    "$className": "DataModel",
+
+    "Workspace": {
+      "$properties": {
+        "FilteringEnabled": true
+      },
+      "lua-additions": {
+        "$className": "Folder",
+        "src": {
+          "$path": "src/"
+        },
+        "tests": {
+          "$path": "tests/"
+        },
+        "MainModule": {
+          "$path": "MainModule.lua"
+        }
+      }
+    }
+  }
+}

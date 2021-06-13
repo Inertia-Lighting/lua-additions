@@ -1,0 +1,9 @@
+# Visual Studio Code
+.vscode
+
+# Project place file
+/lua-additions.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock

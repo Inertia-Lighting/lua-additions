@@ -2,9 +2,11 @@ local LuaAdditions = {}
 
 ---------------------------------------------------------------
 
-LuaAdditions.Table = require(script.Parent.src.Table)
+local srcFolder = script.Parent:WaitForChild('src')
 
-LuaAdditions.String = require(script.Parent.src.String)
+LuaAdditions.Table = require(srcFolder.Table)
+
+LuaAdditions.String = require(srcFolder.String)
 
 ---------------------------------------------------------------
 
