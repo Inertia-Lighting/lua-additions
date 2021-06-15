@@ -4,16 +4,21 @@ local Table = {}
 
 --- Clones a table and returns the clone
 --- @param tbl table
+--- @param recursive boolean (default: false) whether to perform a deep clone of any nested tables
 --- @returns cloned table
-function Table.clone(tbl)
-    local cloned = { table.unpack(tbl) }
+function Table.clone(tbl, recursive)
+    local cloned = {}
+
+    for key, value in pairs(tbl) do
+        cloned[key] = (recursive and type(value) == 'table') and Table.clone(value) or value
+    end
 
     return cloned
 end
 
 --- Combines all values from a table into a new string spaced by a separator
 --- @param tbl table
---- @param separator string
+--- @param separator string (default: ',')
 --- @returns str string
 function Table.join(tbl, separator)
     local str = ''
@@ -27,8 +32,8 @@ end
 
 --- Clones a slice from the table starting at the (startIndex or 1) up to the (endIndex or #tbl)
 --- @param tbl table
---- @param startIndex number
---- @param endIndex number
+--- @param startIndex number (default: 1)
+--- @param endIndex number (default: #tbl)
 --- @returns sliced table
 function Table.slice(tbl, startIndex, endIndex)
     local sliced = {}
