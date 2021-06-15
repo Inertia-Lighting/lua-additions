@@ -30,7 +30,7 @@ function Table.join(tbl, separator)
     return str
 end
 
---- Clones a slice from the table starting at the (startIndex or 1) up to the (endIndex or #tbl)
+--- Clones a slice from the table starting at the startIndex up to the endIndex
 --- @param tbl table
 --- @param startIndex number (default: 1)
 --- @param endIndex number (default: #tbl)
