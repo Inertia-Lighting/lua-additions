@@ -1,4 +1,8 @@
 --------------------------------------------------------------------------------------------------------------------------------
+--[[                                              Copyright © Inertia Lighting                                              ]]--
+--------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- Calling this script will run various tests to ensure that this library is working properly
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -62,6 +66,7 @@ local testsWereSuccessful = spawn(function()
 
     local testTbl = { 'a', 'b', 'c', '', 'hello', 'world', '', 1, 2, 3 }
     local testTblMap = { 1, 2, 3 }
+    local testTblReduce = { 5, 10, 50 }
 
     print('Testing LA.Table.clone')
     for i, v in ipairs(LA.Table.clone(testTbl)) do
@@ -84,7 +89,11 @@ local testsWereSuccessful = spawn(function()
         assert(v == referenceMultipliedTestTblMap[i], 'Failed to properly map table, test failed at index: ' .. tostring(i))
     end
 
-    -- @TODO Table.reduce
+    print('Testing LA.Table.reduce')
+    local referenceSumOfTestTblReduce = 65
+    local testTblReduceSum = LA.Table.reduce(testTblReduce, function(accumulatedValue, currentValue) return accumulatedValue + currentValue end)
+    assert(testTblReduceSum == referenceSumOfTestTblReduce, 'Failed to reduce table to sum of values')
+
     -- @TODO Table.forEach
     -- @TODO Table.includes
     -- @TODO Table.find
@@ -93,7 +102,7 @@ local testsWereSuccessful = spawn(function()
     -- @TODO Table.prepend
     -- @TODO Table.append
 
-    -- print('Tests passed for LA.Table')
+    print('Tests passed for LA.Table')
 end)
 
 return testsWereSuccessful -- true | false
