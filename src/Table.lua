@@ -34,7 +34,7 @@ function Table.join(tbl, separator)
     return str
 end
 
---- Clones a slice from the table starting at the startIndex up to the endIndex
+--- Clones a slice from the table starting at the startIndex up to (but not including) the endIndex
 --- @param tbl table
 --- @param startIndex number (default: 1)
 --- @param endIndex number (default: #tbl)
@@ -42,7 +42,7 @@ end
 function Table.slice(tbl, startIndex, endIndex)
     local sliced = {}
 
-    for index = startIndex or 1, endIndex or #tbl, 1 do
+    for index = startIndex or 1, endIndex - 1 or #tbl, 1 do
         sliced[#sliced + 1] = tbl[index]
     end
 
@@ -159,7 +159,7 @@ function Table.reverse(tbl)
 end
 
 --- Prepends the values from tableToPrepend into tbl
---- @notice (this method mutates the original table)
+--- @warning (this method mutates the original table)
 --- @param tbl table
 --- @param tableToPrepend table
 --- @returns tbl table
@@ -176,7 +176,7 @@ function Table.prepend(tbl, tableToPrepend)
 end
 
 --- Appends the values from tableToAppend into tbl
---- @notice (this method mutates the original table)
+--- @warning (this method mutates the original table)
 --- @param tbl table
 --- @param tableToAppend table
 --- @returns tbl table

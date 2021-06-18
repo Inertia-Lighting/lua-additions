@@ -67,10 +67,11 @@ local testsWereSuccessful = spawn(function()
     local testTbl = { 'a', 'b', 'c', '', 'hello', 'world', '', 1, 2, 3 }
     local testTblMap = { 1, 2, 3 }
     local testTblReduce = { 5, 10, 50 }
+    local testTblForEach = { 5, 2, -1 }
 
     print('Testing LA.Table.clone')
     for i, v in ipairs(LA.Table.clone(testTbl)) do
-        assert(v == testTbl[i], 'Failed to properly clone table, test failed at index: ' .. tostring(i))
+        assert(v == testTbl[i], 'Failed to clone table, test failed at index: ' .. tostring(i))
     end
 
     print('Testing LA.Table.join')
@@ -79,14 +80,14 @@ local testsWereSuccessful = spawn(function()
     print('Testing LA.Table.slice')
     local referenceSlicedTestTbl = { 'c', '', 'hello' }
     for i, v in ipairs(LA.Table.slice(testTbl, 3, 6)) do
-        assert(v == referenceSlicedTestTbl[i], 'Failed to properly clone table, test failed at index: ' .. tostring(i))
+        assert(v == referenceSlicedTestTbl[i], 'Failed to slice table, test failed at index: ' .. tostring(i))
     end
 
     print('Testing LA.Table.map')
     local referenceMultipliedTestTblMap = { 2, 4, 6 }
     local testTblMapMultipliedByTwo = LA.Table.map(testTblMap, function(value) return value * 2 end)
-    for i, v in ipairs(LA.Table.slice(testTblMapMultipliedByTwo, 3, 6)) do
-        assert(v == referenceMultipliedTestTblMap[i], 'Failed to properly map table, test failed at index: ' .. tostring(i))
+    for i, v in ipairs(testTblMapMultipliedByTwo) do
+        assert(v == referenceMultipliedTestTblMap[i], 'Failed to map table, test failed at index: ' .. tostring(i))
     end
 
     print('Testing LA.Table.reduce')
@@ -94,9 +95,24 @@ local testsWereSuccessful = spawn(function()
     local testTblReduceSum = LA.Table.reduce(testTblReduce, function(accumulatedValue, currentValue) return accumulatedValue + currentValue end)
     assert(testTblReduceSum == referenceSumOfTestTblReduce, 'Failed to reduce table to sum of values')
 
-    -- @TODO Table.forEach
-    -- @TODO Table.includes
-    -- @TODO Table.find
+    print('Testing LA.Table.forEach')
+    local referenceTestTblForEach = -10
+    local testTblForEachAccumulatedValue = 1
+    LA.Table.forEach(testTblForEach, function(value) testTblForEachAccumulatedValue = testTblForEachAccumulatedValue * value end)
+    assert(testTblForEachAccumulatedValue == referenceTestTblForEach, 'Failed to forEach table to product of values')
+
+    print('Testing LA.Table.includes')
+    local referenceTestTblIncludesOne = 'a'
+    local referenceTestTblIncludesTwo = 'z'
+    local testTblIncludesOne = LA.Table.includes(testTbl, referenceTestTblIncludesOne)
+    local testTblIncludesTwo = LA.Table.includes(testTbl, referenceTestTblIncludesTwo)
+    assert(testTblIncludesOne and not testTblIncludesTwo, 'Failed table includes test')
+
+    print('Testing LA.Table.find')
+    local referenceTestTblFindValue = 'world'
+    local testTblFindValue = LA.Table.find(testTbl, function(value) return value == referenceTestTblFindValue end)
+    assert(testTblFindValue, 'Failed to find value in table')
+
     -- @TODO Table.filter
     -- @TODO Table.reverse
     -- @TODO Table.prepend
