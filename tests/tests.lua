@@ -11,7 +11,7 @@ local rootFolder = testsFolder.Parent
 
 local LA = require(rootFolder.MainModule)
 
-local testsWereSuccessful = spawn(function()
+local testsWereSuccessful = pcall(function()
     --------------------------------------------------------------------------------------------------------------------------------
     -- Testing LA.String
     --------------------------------------------------------------------------------------------------------------------------------

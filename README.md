@@ -1,22 +1,25 @@
-# Lua Additions (beta | not safe for production usage)
+# Lua Additions
+
+## Warning
+### This is a beta version of Lua Additions (use at your own risk).
 
 ## About
-
-### This library aims to provide enhancements for Roblox and Lua's standard library.
-### This library is ready to use (with little modifications) inside of Roblox.
+### Lua Additions aims to provide enhancements for Roblox and Lua's standard library.
 ### Most of the methods in this library are directly inspired by the TC39 ECMAScript (JavaScript) standard.
 
-## Notice
-### Currently we have not released a require-able asset for this repository, therefore you must download this repository and use a tool called Rojo to use it Roblox.
+## Installation
+1. Download the latest release from the [releases](https://github.com/Inertia-Lighting/lua-additions/releases) page.
+2. Insert the `lua-additions[...].rbxm` file into the `Workspace` folder in Roblox Studio.
+3. Ensure that the `lua-additions` folder was inserted into the `Workspace` folder.
 
-## Example Usage for Roblox
+## Usage
 ```lua
--- some script
-local LA = require(game.Workspace:WaitForChild('lua-additions').MainModule)
+-- import lua-additions from your `Workspace` folder
+local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
 
 local mathProblems = {
-    add = { 24, 3, 5, 7 }, -- goal: add all of the numbers
-    subtract = { 24, 3, 5, 7 }, -- goal: subtract all of the numbers
+    ['add'] = { 24, 3, 5, 7 }, -- goal: add all of the numbers
+    ['subtract'] = { 24, 3, 5, 7 }, -- goal: subtract all of the numbers
 }
 
 local solvedMathProblems = LA.Table.map(mathProblems, function(mathProblemValues, mathProblemType)
@@ -31,27 +34,41 @@ local solvedMathProblems = LA.Table.map(mathProblems, function(mathProblemValues
     end)
 end)
 
-print('solvedMathProblems:', solvedMathProblems)
+print('Output:')
+LA.Table.forEach(solvedMathProblems, function(solvedMathProblemValue, solvedMathProblemType)
+    print(solvedMathProblemType, ':', solvedMathProblemValue)
+end)
 
--- solvedMathProblems: {
---     add = 39,
---     subtract = 9,
--- }
+-- Output:
+-- add : 39
+-- subtract : 9
 ```
 
-## Example Testing for Roblox
+## Testing
+To test this library, you must require the tests module.
 ```lua
 -- some script
-local luaAdditionsTestsWereSuccessful = require(game.Workspace:WaitForChild('lua-additions').tests.tests)
+local luaAdditionsFolder = game.Workspace:WaitForChild('lua-additions')
+local luaAdditionsTestsFolder = luaAdditionsFolder:WaitForChild('tests')
+local luaAdditionsTestsFolderScript = luaAdditionsTestsFolder:WaitForChild('tests')
+local luaAdditionsTestsWereSuccessful = require(luaAdditionsTestsFolderScript)
 
 print('luaAdditionsTestsWereSuccessful:', luaAdditionsTestsWereSuccessful)
 
 -- luaAdditionsTestsWereSuccessful: true
---  or
--- luaAdditionsTestsWereSuccessful: false
+```
+Any errors will be outputted to the console.
+
+## Development
+To assist with developing this library, you can use Rojo.
+```
+rojo serve
 ```
 
 ## License
 
 ### This repository uses the MIT license.
-### Check out the [License](./LICENSE.md).
+### You can read the license [here](./LICENSE.md).
+
+## Copyright
+Copyright &copy; Inertia Lighting | Some Rights Reserved
