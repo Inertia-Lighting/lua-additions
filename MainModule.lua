@@ -12,6 +12,8 @@ LuaAdditions.Table = require(srcFolder.Table)
 
 LuaAdditions.String = require(srcFolder.String)
 
+LuaAdditions.Utility = require(srcFolder.Utility)
+
 ---------------------------------------------------------------
 
 return LuaAdditions

@@ -119,6 +119,30 @@ local testsWereSuccessful = pcall(function()
     -- @TODO Table.append
 
     print('Tests passed for LA.Table')
+
+    --------------------------------------------------------------------------------------------------------------------------------
+    -- Testing LA.Utility
+    --------------------------------------------------------------------------------------------------------------------------------
+
+    print('Testing LA.Utility.switch')
+    local referenceSwitchReturnValue = 'y'
+    local testSwitchReturnValue = LA.Utility.switch('test_2', {
+        ['test_1'] = function()
+            return 'x'
+        end,
+        ['test_2'] = function()
+            return 'y'
+        end,
+        ['test_3'] = function()
+            return 'z'
+        end,
+        ['default'] = function()
+            return 'default'
+        end,
+    }, true)
+    assert(testSwitchReturnValue == referenceSwitchReturnValue, 'Failed to return proper value from switch function')
+
+    print('Tests passed for LA.Utility')
 end)
 
 return testsWereSuccessful -- true | false
