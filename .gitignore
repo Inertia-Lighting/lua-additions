@@ -1,9 +1,25 @@
-# Visual Studio Code
+# environment variables
+*.env
+
+# batch scripts
+*.bat
+*.cmd
+
+# bash scripts
+*.sh
+
+# git stuff
+.git
+
+# vscode configs
 .vscode
 
-# Project place file
+# vscode extensions
+.VSCodeCounter
+
+# project export file
 /lua-additions.rbxlx
 
-# Roblox Studio lock files
+# roblox studio lock files
 /*.rbxlx.lock
 /*.rbxl.lock
