@@ -39,6 +39,19 @@ function Utility.switch(condition, cases, strict)
     return case() or nil
 end
 
+function Utility.try(func)
+    local t = {}
+
+    local success, result = pcall(func)
+
+    function t:catch(func)
+        if success then return end
+        func(result)
+    end
+
+    return t
+end
+
 --------------------------------------------------------------------------------------------------------------------------------
 
 return Utility
