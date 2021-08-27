@@ -39,6 +39,9 @@ function Utility.switch(condition, cases, strict)
     return case() or nil
 end
 
+--- Implements a basic try-catch block for lua
+--- @param func function the function to try via pcall
+--- @returns t table a table containing a chain-able ':catch(func)' callback
 function Utility.try(func)
     local t = {}
 
