@@ -6,6 +6,10 @@ local LuaAdditions = {}
 
 ---------------------------------------------------------------
 
+LuaAdditions.version = 'v0.0.2-beta'
+
+---------------------------------------------------------------
+
 local srcFolder = script.Parent:WaitForChild('src')
 
 LuaAdditions.Table = require(srcFolder.Table)

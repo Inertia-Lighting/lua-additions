@@ -8,14 +8,28 @@
 ### Most of the methods in this library are directly inspired by the TC39 ECMAScript (JavaScript) standard.
 
 ## Installation
-1. Download the latest release from the [releases](https://github.com/Inertia-Lighting/lua-additions/releases) page.
-2. Insert the `lua-additions[...].rbxm` file into the `Workspace` folder in Roblox Studio.
-3. Ensure that the `lua-additions` folder was inserted into the `Workspace` folder.
+
+- ### Automatic
+    ```lua
+    local LA = require(7564836781)
+    ```
+
+- ### Manual
+    1. Download the latest release from the [releases](https://github.com/Inertia-Lighting/lua-additions/releases) page.
+    2. Insert the `lua-additions[...].rbxm` file into the `Workspace` folder in Roblox Studio.
+    3. Ensure that the `lua-additions` folder was inserted into the `Workspace` folder.
+    ```lua
+    local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
+    ```
+- ### Check the installation
+    Make sure to check that the version of Lua Additions you are using is up-to-date.
+    ```lua
+    print(LA.version)
+    ```
 
 ## Usage
 ```lua
--- import lua-additions from your `Workspace` folder
-local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
+-- import lua-additions from the installation step above
 
 local mathProblems = {
     ['add'] = { 24, 3, 5, 7 }, -- goal: add all of the numbers
