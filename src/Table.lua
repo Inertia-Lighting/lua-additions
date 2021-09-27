@@ -20,6 +20,45 @@ function Table.clone(tbl, recursive)
     return cloned
 end
 
+--- Returns all indexes of a table
+--- @param tbl table
+--- @returns indexes table
+function Table.indexes(tbl)
+    local indexes = {}
+
+    for index in ipairs(tbl) do
+        indexes[#indexes + 1] = index
+    end
+
+    return indexes
+end
+
+--- Returns all keys of a table
+--- @param tbl table
+--- @returns keys table
+function Table.keys(tbl)
+    local keys = {}
+
+    for key in pairs(tbl) do
+        keys[#keys + 1] = key
+    end
+
+    return keys
+end
+
+--- Returns all values of a table
+--- @param tbl table
+--- @returns values table
+function Table.values(tbl)
+    local values = {}
+
+    for _, value in pairs(tbl) do
+        values[#values + 1] = value
+    end
+
+    return values
+end
+
 --- Combines all values from a table into a new string spaced by a separator
 --- @param tbl table
 --- @param separator string (default: ',')
