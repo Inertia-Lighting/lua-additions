@@ -41,14 +41,23 @@ end
 
 --- Implements a basic try-catch block for lua
 --- @param func function the function to try via pcall
---- @returns t table a table containing a chain-able ':catch(func)' callback
+--- @returns t table a table containing a chain-able ':catch(func?)' callback
 function Utility.try(func)
+    if type(func) ~= 'function' then
+        error('LA.Utility.try: func must be a function')
+    end
+
     local t = {}
 
     local success, result = pcall(func)
 
     function t:catch(func)
+        if func and type(func) ~= 'function' then
+            error('LA.Utility.try: func must be a function when specified')
+        end
+
         if success then return end
+
         func(result)
     end
 

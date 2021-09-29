@@ -7,11 +7,11 @@
 ### Lua Additions aims to provide enhancements for Roblox and Lua's standard library.
 ### Most of the methods in this library are directly inspired by the TC39 ECMAScript (JavaScript) standard.
 
-## Installation
+## Installation (Roblox)
 
 - ### Automatic
     ```lua
-    local LA = require(7564836781)
+    local LA = require(7564836781) -- this asset id is owned by Inertia Lighting
     ```
 
 - ### Manual
@@ -58,7 +58,7 @@ end)
 -- subtract : 9
 ```
 
-## Testing
+## Testing (Roblox)
 To test this library, you must require the tests module.
 ```lua
 -- some script
@@ -71,10 +71,11 @@ print('luaAdditionsTestsWereSuccessful:', luaAdditionsTestsWereSuccessful)
 
 -- luaAdditionsTestsWereSuccessful: true
 ```
-Any errors will be outputted to the console.
+Any errors will be outputted to the console.  
+Any PRs that improve the test coverage of the library will be appreciated.
 
 ## Development
-To assist with developing this library, you can use Rojo.
+To assist with developing this library, you can use [Rojo](https://rojo.space/).
 ```
 rojo serve
 ```
