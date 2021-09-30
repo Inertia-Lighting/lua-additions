@@ -1,6 +1,6 @@
 # Lua Additions
 
-## Warning
+## Disclaimer
 ### This is a beta version of Lua Additions (use at your own risk).
 
 ## About
@@ -29,7 +29,9 @@
     print(LA.version)
     ```
 
-## Usage
+## Example Usage
+The following contains two examples of what you can accomplish with Lua Additions.  
+Check with the [source code](./src) for documentation and a comprehensive listing of the methods and utilities that are available.
 ```lua
 -- import lua-additions from the installation step above
 
@@ -58,6 +60,21 @@ end)
 -- Output:
 -- add : 39
 -- subtract : 9
+
+----------------------------------------------------------------
+
+LA.Utility.try(function()
+    -- this will throw an error
+    error('the developer ran out of coffee')
+end):catch(function(errorMessage)
+    -- the error will be caught and sent here
+    warn('something went wrong!', errorMessage)
+end)
+print('this isn\'t affected by the error above')
+
+-- Output:
+-- something went wrong! the developer ran out of coffee
+-- this isn't affected by the error above
 ```
 
 ## Testing (Roblox)
