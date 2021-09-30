@@ -11,10 +11,12 @@
 
 - ### Automatic
     ```lua
-    local LA = require(7564836781) -- this asset id is owned by Inertia Lighting
+    -- The following asset id is owned and updated by Inertia Lighting.
+    -- Inertia Lighting expresses no guarantee or liability for the usage of this asset id.
+    local LA = require(7564836781)
     ```
 
-- ### Manual
+- ### Manual (used for testing)
     1. Download the latest release from the [releases](https://github.com/Inertia-Lighting/lua-additions/releases) page.
     2. Insert the `lua-additions[...].rbxm` file into the `Workspace` folder in Roblox Studio.
     3. Ensure that the `lua-additions` folder was inserted into the `Workspace` folder.
@@ -22,7 +24,7 @@
     local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
     ```
 - ### Check the installation
-    Make sure to check that the version of Lua Additions you are using is up-to-date.
+    Ensure the version of Lua Additions you are using is up-to-date with the [latest release](https://github.com/Inertia-Lighting/lua-additions/releases).
     ```lua
     print(LA.version)
     ```
@@ -59,7 +61,7 @@ end)
 ```
 
 ## Testing (Roblox)
-To test this library, you must require the tests module.
+To test this library, you must require the tests module from the **manual installation** above.
 ```lua
 -- some script
 local luaAdditionsFolder = game.Workspace:WaitForChild('lua-additions')
@@ -75,7 +77,7 @@ Any errors will be outputted to the console.
 Any PRs that improve the test coverage of the library will be appreciated.
 
 ## Development
-To assist with developing this library, you can use [Rojo](https://rojo.space/).
+To assist with developing this library, you can use [Rojo](https://rojo.space/) to easily work in your code editor of choice and have it automatically sync to Roblox Studio.
 ```
 rojo serve
 ```
