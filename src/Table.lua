@@ -59,7 +59,7 @@ function Table.values(tbl)
     return values
 end
 
---- Combines all values from a table into a new string spaced by a separator
+--- Combines all values from an array-like table (numerically indexed) into a new string spaced by a separator
 --- @param tbl table
 --- @param separator string (default: ',')
 --- @returns str string
@@ -71,6 +71,31 @@ function Table.join(tbl, separator)
     end
 
     return str
+end
+
+--- Merges several (dictionaries or arrays) into a new (dictionary or array) respectively
+--- @param ... args multiple (dictionaries or arrays) provided as separate arguments
+--- @returns merged table dictionary or array (depending on the supplied arguments)
+function Table.merge(...)
+    local tabs = { ... }
+
+    local merged = {}
+
+    for tabIndex, tab in ipairs(tabs) do
+        if #tab == 0 then -- dictionary detected
+            if tabIndex > 1 and #merged > 0 then error('Cannot merge dictionaries with arrays') end
+            for key, value in pairs(tab) do
+                merged[key] = value
+            end
+        else -- array detected
+            if tabIndex > 1 and #merged == 0 then error('Cannot merge arrays with dictionaries') end
+            for _, value in ipairs(tab) do
+                merged[#merged + 1] = value
+            end
+        end
+    end
+
+    return merged
 end
 
 --- Clones a slice from the table starting at the startIndex up to (but not including) the endIndex
