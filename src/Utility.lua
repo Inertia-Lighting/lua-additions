@@ -19,7 +19,7 @@ function Utility.switch(condition, cases, strict)
     local specifiedCase = nil
     for caseCondition in pairs(cases) do
         if caseCondition == condition then
-            specifiedCase = caseCondition
+            specifiedCase = cases[caseCondition]
             break
         end
     end
