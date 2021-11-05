@@ -74,7 +74,7 @@ function Table.join(tbl, separator)
 end
 
 --- Merges several (dictionaries or arrays) into a new (dictionary or array) respectively
---- @param ... args multiple (dictionaries or arrays) provided as separate arguments
+--- @params ... args multiple (dictionaries or arrays) provided as separate arguments
 --- @returns merged table dictionary or array (depending on the supplied arguments)
 function Table.merge(...)
     local tabs = { ... }
