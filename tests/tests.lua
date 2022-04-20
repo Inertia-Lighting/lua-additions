@@ -78,8 +78,8 @@ local testsWereSuccessful = pcall(function()
     assert(LA.Table.join(testTbl, ',') == 'a,b,c,,hello,world,,1,2,3', 'Failed to join table using commas')
 
     print('Testing LA.Table.slice')
-    local referenceSlicedTestTbl = { 'c', '', 'hello' }
-    for i, v in ipairs(LA.Table.slice(testTbl, 3, 6)) do
+    local referenceSlicedTestTbl = { 'c', '', 'hello', 'world' }
+    for i, v in ipairs(LA.Table.slice(testTbl, -8, 6)) do
         assert(v == referenceSlicedTestTbl[i], 'Failed to slice table, test failed at index: ' .. tostring(i))
     end
 

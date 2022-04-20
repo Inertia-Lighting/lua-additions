@@ -100,13 +100,37 @@ end
 
 --- Clones a slice from the table starting at the startIndex up to (but not including) the endIndex
 --- @param tbl table
---- @param startIndex number (default: 1)
---- @param endIndex number (default: #tbl)
+--- @param startIndex number (can be negative-indexed) (default: 1)
+--- @param endIndex number (can be negative-indexed) (default: #tbl)
 --- @returns sliced table
 function Table.slice(tbl, startIndex, endIndex)
     local sliced = {}
 
-    for index = startIndex or 1, endIndex - 1 or #tbl, 1 do
+    if startIndex == nil then
+        startIndex = 1
+    end
+
+    if startIndex < 0 then
+        startIndex = #tbl + startIndex + 1
+    end
+
+    if (startIndex == #tbl) and (endIndex == nil) then
+        endIndex = #tbl + 1
+    end
+
+    if endIndex == nil then
+        endIndex = #tbl
+    end
+
+    if endIndex < 0 then
+        endIndex = #tbl + endIndex + 1
+    end
+
+    if startIndex >= endIndex then
+        return sliced
+    end
+
+    for index = startIndex, endIndex - 1, 1 do
         sliced[#sliced + 1] = tbl[index]
     end
 
