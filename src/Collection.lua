@@ -40,11 +40,21 @@ end
 --------------------------------------------------------------------------------------------------------------------------------
 
 --- @return number
+--- @example
+--- ```lua
+--- local collection = Collection.new({ { 'hello', 'world' }, { 'lorem', 'ipsum' } })
+--- print(collection:size()) -- 2
+--- ```
 function Collection:size()
     return #self._storage
 end
 
 --- @return table keys
+--- @example
+--- ```lua
+--- local collection = Collection.new({ { 'this', 'is' }, { 'a', 'test' }, { 'collection', 'of' }, { 'keys', 'and' }, { 'values', '!' } })
+--- print(collection:keys()) -- { 'this', 'a', 'collection', 'keys', 'values' }
+--- ```
 function Collection:keys()
     local keys = {}
 
@@ -56,6 +66,11 @@ function Collection:keys()
 end
 
 --- @return table values
+--- @example
+--- ```lua
+--- local collection = Collection.new({ { 'this', 'is' }, { 'a', 'test' }, { 'collection', 'of' }, { 'keys', 'and' }, { 'values', '!' } })
+--- print(collection:values()) -- { 'is', 'test', 'of', 'and', '!' }
+--- ```
 function Collection:values()
     local values = {}
 
@@ -70,6 +85,12 @@ end
 
 --- @param key string
 --- @return boolean exists
+--- @example
+--- ```lua
+--- local collection = Collection.new({ { 'iron', 'FE' }, { 'gold', 'AU' } })
+--- print(collection:has('iron')) -- true
+--- print(collection:has('platinum')) -- false
+--- ```
 function Collection:has(key)
     if type(key) ~= 'string' then
         error('Collection.has(): `key` must be a string')
@@ -86,6 +107,14 @@ end
 
 --- @param key string
 --- @return any value (defaults to `nil` if not found)
+--- @example
+--- ```lua
+--- local collection = Collection.new({ { 'apple', 'red' }, { 'banana', 'yellow' }, { 'blueberry', 'blue' } })
+--- print(collection:get('apple')) -- red
+--- print(collection:get('banana')) -- yellow
+--- print(collection:get('blueberry')) -- blue
+--- print(collection:get('orange')) -- nil
+--- ```
 function Collection:get(key)
     if type(key) ~= 'string' then
         error('Collection.get(): `key` must be a string')
@@ -106,6 +135,7 @@ end
 --- @example
 --- ```lua
 --- local collection = Collection.new()
+--- print(collection:get('nice')) -- nil
 --- collection:set('nice', 69)
 --- print(collection:get('nice')) -- 69
 --- ```
@@ -125,6 +155,36 @@ function Collection:set(key, value)
     table.insert(self._storage, { key, value })
 
     return self
+end
+
+--- Ensures that the collection has a value for the specified key.
+--- @param key string
+--- @param defaultValueGenerator function `(key, collection) => defaultValue`
+--- @return any value
+--- @example
+--- ```lua
+--- local collection = Collection.new()
+--- collection:ensure('nice', function(key, collection)
+---     return 69
+--- end)
+--- print(collection:get('nice')) -- 69
+--- ```
+function Collection:ensure(key, defaultValueGenerator)
+    if type(key) ~= 'string' then
+        error('Collection.ensure(): `key` must be a string')
+    end
+
+    if type(defaultValueGenerator) ~= 'function' then
+        error('Collection.ensure(): `defaultValueGenerator` must be a function')
+    end
+
+    if self:has(key) then
+        return self:get(key)
+    end
+
+    local defaultValue = defaultValueGenerator(key, self)
+    self:set(key, defaultValue)
+    return defaultValue
 end
 
 --- @param key string
@@ -166,7 +226,7 @@ function Collection:clear()
     return self
 end
 
---- @param callback function callback(value, key, tbl)
+--- @param callback function `(value, key, tbl) => void`
 --- @return table self
 --- @example
 --- ```lua
@@ -189,7 +249,7 @@ function Collection:forEach(callback)
     return self
 end
 
---- @param mapFunction function `cb(value, key, collection)`
+--- @param mapFunction function `(value, key, collection) => newValue`
 --- @return table mapped contains the results of the map function
 --- @example
 --- ```lua
@@ -213,7 +273,7 @@ function Collection:map(mapFunction)
     return mapped
 end
 
---- @param reduceFunction function `cb(accumulator, value, key, collection)`
+--- @param reduceFunction function `(accumulator, value, key, collection) => modifiedAccumulator`
 --- @param initialValue any (optional, defaults to `nil`)
 --- @example
 --- ```lua
@@ -237,7 +297,7 @@ function Collection:reduce(reduceFunction, initialValue)
     return accumulator
 end
 
---- @param compareFunction function `cb(firstValue, secondValue, firstKey, secondKey, collection)`
+--- @param compareFunction function `(firstValue, secondValue, firstKey, secondKey, collection) => boolean`
 --- @example
 --- ```lua
 --- local collection = Collection.new({ { 'a', 4 }, { 'b', 2 }, { 'c', 5 }, { 'd', 1 }, { 'e', 3 } })
@@ -255,6 +315,87 @@ function Collection:sort(compareFunction)
     end)
 
     return self
+end
+
+--- @param callback function `(value, key, collection) => any`
+--- @return any value
+--- @example
+--- ```lua
+--- local collection = Collection.new({
+---     { '13123123', { name = 'John', age = 23 } },
+---     { '12312312', { name = 'Jane', age = 21 } },
+---     { '12312312', { name = 'Jack', age = 25 } },
+--- })
+--- local personNamedJohn = collection:find(function(value)
+---     return value.name == 'John'
+--- end)
+--- print(personNamedJohn.age) -- 23
+--- ```
+function Collection:find(callback)
+    if type(callback) ~= 'function' then
+        error('Collection.find(): `callback` must be a function')
+    end
+
+    for _, entry in ipairs(self._storage) do
+        if callback(entry[2], entry[1], self) then
+            return entry[2]
+        end
+    end
+
+    return nil
+end
+
+--- @param callback function `(value, key, collection) => new Collection`
+--- @return table filtered collection contains the results of the filter function
+--- @example
+--- ```lua
+--- local collection = Collection.new({ { 'nice', 69 }, { 'thing', 420 } })
+--- local filtered = collection:filter(function(value)
+---     return value > 100
+--- end)
+--- print(filtered) -- { { 'thing', 420 } }
+--- ```
+function Collection:filter(callback)
+    if type(callback) ~= 'function' then
+        error('Collection.filter(): `callback` must be a function')
+    end
+
+    local filtered = Collection.new()
+
+    for _, entry in ipairs(self._storage) do
+        if callback(entry[2], entry[1], self) then
+            filtered:set(entry[1], entry[2])
+        end
+    end
+
+    return filtered
+end
+
+--- @param collection table
+--- @return table concatenatedCollection
+--- @example
+--- ```lua
+--- local collection = Collection.new({ { 'nice', 69 }, { 'thing', 420 } })
+--- local otherCollection = Collection.new({ { 'hello', 'world' }, { 'goodbye', 'moon' } })
+--- local concatenatedCollection = collection:concat(otherCollection)
+--- print(concatenatedCollection:size()) -- 4
+--- ```
+function Collection:concat(collection)
+    if type(collection) ~= 'table' then
+        error('Collection.concat(): `collection` must be a table')
+    end
+
+    local concatenatedCollection = Collection.new()
+
+    for _, entry in ipairs(self._storage) do
+        concatenatedCollection:set(entry[1], entry[2])
+    end
+
+    for _, entry in ipairs(collection) do
+        concatenatedCollection:set(entry[1], entry[2])
+    end
+
+    return concatenatedCollection
 end
 
 --------------------------------------------------------------------------------------------------------------------------------
