@@ -18,6 +18,8 @@ LuaAdditions.String = require(srcFolder.String)
 
 LuaAdditions.Utility = require(srcFolder.Utility)
 
+LuaAdditions.Collection = require(srcFolder.Collection)
+
 ---------------------------------------------------------------
 
 return LuaAdditions
