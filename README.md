@@ -1,11 +1,8 @@
 # Lua Additions
 
-## Disclaimer
-### This is a beta version of Lua Additions (use at your own risk).
-
 ## About
 ### Lua Additions aims to provide enhancements for Roblox and Lua's standard library.
-### Most of the methods in this library are directly inspired by the TC39 ECMAScript (JavaScript) standard.
+### A large portion of this library is inspired by the TC39 ECMAScript (JavaScript) standard.
 
 ## Installation (Roblox)
 
@@ -23,6 +20,7 @@
     ```lua
     local LA = require(game.Workspace:WaitForChild('lua-additions'):WaitForChild('MainModule'))
     ```
+
 - ### Check the installation
     Ensure the version of Lua Additions you are using is up-to-date with the [latest release](https://github.com/Inertia-Lighting/lua-additions/releases).
     ```lua
