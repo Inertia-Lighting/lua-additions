@@ -124,6 +124,37 @@ function String.split(str, separator)
     return split
 end
 
+--- Segments a string using a delimiter at specified intervals
+--- @param input string
+--- @param delimiter string
+--- @param length number
+--- @returns output string
+function String.segment(input, delimiter, length)
+    if type(input) ~= 'string' then
+        error('String.segment: `input` must be a string')
+    end
+
+    if type(delimiter) ~= 'string' then
+        error('String.segment: `delimiter` must be a string')
+    end
+
+    if type(length) ~= 'number' then
+        error('String.segment: `length` must be a number')
+    end
+
+    local output = ''
+
+    for i = 1, #input, 1 do
+        if (i > 1) and ((i - 1) % length == 0) then
+            output = output .. delimiter
+        end
+
+        output = output .. input:sub(i, i)
+    end
+
+    return output
+end
+
 --------------------------------------------------------------------------------------------------------------------------------
 
 return String
