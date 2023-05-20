@@ -1,7 +1,9 @@
 # Lua Additions
 
 ## About
+
 ### Lua Additions aims to provide enhancements for Roblox and Lua's standard library.
+
 ### A large portion of this library is inspired by the TC39 ECMAScript (JavaScript) standard.
 
 ## Installation (Roblox)
@@ -28,6 +30,7 @@
     ```
 
 ## Example Usage
+
 The following contains two examples of what you can accomplish with Lua Additions.  
 Check with the [source code](./src) for documentation and a comprehensive listing of the methods and utilities that are available.
 ```lua
@@ -76,6 +79,7 @@ print('this isn\'t affected by the error above')
 ```
 
 ## Testing (Roblox)
+
 To test this library, you must require the tests module from the **manual installation** above.
 ```lua
 -- some script
@@ -88,10 +92,11 @@ print('luaAdditionsTestsWereSuccessful:', luaAdditionsTestsWereSuccessful)
 
 -- luaAdditionsTestsWereSuccessful: true
 ```
-Any errors will be outputted to the console.  
+Any errors will be shown in the console.  
 Any PRs that improve the test coverage of the library will be appreciated.
 
 ## Development
+
 To assist with developing this library, you can use [Rojo](https://rojo.space/) to easily work in your code editor of choice and have it automatically sync to Roblox Studio.
 ```
 rojo serve
@@ -100,7 +105,9 @@ rojo serve
 ## License
 
 ### This repository uses the MIT license.
+
 ### You can read the license [here](./LICENSE.md).
 
 ## Copyright
+
 Copyright &copy; Inertia Lighting | Some Rights Reserved

@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------------------------------------------------------
---[[                                              Copyright © Inertia Lighting                                              ]]--
+--[[                                             Copyright (C) Inertia Lighting                                             ]]--
 --------------------------------------------------------------------------------------------------------------------------------
 
 local LuaAdditions = {}
@@ -10,7 +10,13 @@ LuaAdditions.version = 'v0.0.4-beta'
 
 ---------------------------------------------------------------
 
-local srcFolder = script.Parent:WaitForChild('src')
+local srcFolder = script:WaitForChild('src', 5)
+if not srcFolder then
+    error('LuaAdditions: failed to load src folder')
+    return
+end
+
+---------------------------------------------------------------
 
 LuaAdditions.Table = require(srcFolder.Table)
 

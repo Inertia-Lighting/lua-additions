@@ -13,16 +13,18 @@
       "lua-additions": {
         "$className": "Folder",
 
-        "src": {
-          "$path": "src/"
-        },
-
         "tests": {
           "$path": "tests/"
         },
 
         "MainModule": {
-          "$path": "MainModule.lua"
+          "$path": "MainModule/MainModule.lua",
+
+          "src": {
+            "$className": "Folder",
+
+            "$path": "MainModule/src/"
+          }
         }
       }
     }
