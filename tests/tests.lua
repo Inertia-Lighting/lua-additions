@@ -141,6 +141,10 @@ local testsWereSuccessful = pcall(function()
         end,
     }, true)
     assert(testSwitchReturnValue == referenceSwitchReturnValue, 'Failed to return proper value from switch function')
+    
+    print('Testing LA.Utility.CreateInstance')
+    local TestInstance = LA.Utility.CreateInstance('Folder', 'TestFolder', true)
+    assert(TestInstance ~= nil, 'Failed to return new instance from CreateInstance function')
 
     print('Tests passed for LA.Utility')
 end)
