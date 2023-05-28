@@ -26,6 +26,8 @@ LuaAdditions.Utility = require(srcFolder.Utility)
 
 LuaAdditions.Collection = require(srcFolder.Collection)
 
+LuaAdditions.Integer = require(srcFolder.Integer)
+
 ---------------------------------------------------------------
 
 return LuaAdditions
