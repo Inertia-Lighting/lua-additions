@@ -71,22 +71,20 @@ end
 --- @returns userdata The newly created instance.
 --- @throws error if failed to create the instance.
 function CreateInstance(Class, Name, RandomName)
-    local success, instance = pcall(function()
-        local newInstance = Instance.new(Class)
-        
+    local success, instanceObj = pcall(function()
+        return Instance.new(Class)
+    end)
+    
+    if success and instanceObj then
         if RandomName and RandomName == true then
             Name = game:GetService("HttpService"):GenerateGUID(false)
         end
         
-        newInstance.Name = Name
+        instanceObj.Name = Name
         
-        return newInstance
-    end)
-    
-    if success then
-        return instance
+        return instanceObj
     else
-        error("Failed to create instance: " .. instance)
+        error("Failed to create instance: " .. instanceObj)
     end
 end
  
