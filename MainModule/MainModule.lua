@@ -30,6 +30,8 @@ LuaAdditions.Utility = require(srcFolder.Utility)
 
 LuaAdditions.Collection = require(srcFolder.Collection)
 
+LuaAdditions.Lego = require(srcFolder.Lego)
+
 ---------------------------------------------------------------
 
 return LuaAdditions
