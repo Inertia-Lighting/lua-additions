@@ -64,30 +64,6 @@ function Utility.try(func)
     return t
 end
 
---- Creates a new instance of the specified class with the given name.
---- @param Class string The class of the instance to create.
---- @param Name string The name to assign to the instance.
---- @param RandomName boolean Whether to generate a random name if true.
---- @returns userdata The newly created instance.
---- @throws error if failed to create the instance.
-function CreateInstance(Class, Name, RandomName)
-    local success, instanceObj = pcall(function()
-        return Instance.new(Class)
-    end)
-    
-    if success and instanceObj then
-        if RandomName and RandomName == true then
-            Name = game:GetService("HttpService"):GenerateGUID(false)
-        end
-        
-        instanceObj.Name = Name
-        
-        return instanceObj
-    else
-        error("Failed to create instance: " .. instanceObj)
-    end
-end
- 
 --------------------------------------------------------------------------------------------------------------------------------
 
 return Utility
