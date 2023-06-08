@@ -22,11 +22,15 @@ LuaAdditions.Table = require(srcFolder.Table)
 
 LuaAdditions.String = require(srcFolder.String)
 
+LuaAdditions.Number = require(srcFolder.Number)
+
+LuaAdditions.Integer = require(srcFolder.Integer)
+
 LuaAdditions.Utility = require(srcFolder.Utility)
 
 LuaAdditions.Collection = require(srcFolder.Collection)
 
-LuaAdditions.Integer = require(srcFolder.Integer)
+LuaAdditions.Lego = require(srcFolder.Lego)
 
 LuaAdditions.Color = require(srcFolder.Color)
 
