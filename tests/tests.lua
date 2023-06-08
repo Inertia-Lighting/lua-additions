@@ -55,10 +55,7 @@ local testsWereSuccessful =
         print("Testing LA.String.split")
         local referenceSplitTestStr = {"", "a", "b", "c", "test", "", "1", "", "2", "", "3", ""}
         for i, v in ipairs(LA.String.split(testStrSplit, ",")) do
-            assert(
-                v == referenceSplitTestStr[i],
-                "Failed to properly split string, test failed at index: " .. tostring(i)
-            )
+            assert(v == referenceSplitTestStr[i],"Failed to properly split string, test failed at index: " .. tostring(i))
         end
 
         print("Tests passed for LA.String")
@@ -90,8 +87,7 @@ local testsWereSuccessful =
 
         print("Testing LA.Table.map")
         local referenceMultipliedTestTblMap = {2, 4, 6}
-        local testTblMapMultipliedByTwo =
-            LA.Table.map(
+        local testTblMapMultipliedByTwo = LA.Table.map(
             testTblMap,
             function(value)
                 return value * 2
@@ -103,8 +99,7 @@ local testsWereSuccessful =
 
         print("Testing LA.Table.reduce")
         local referenceSumOfTestTblReduce = 65
-        local testTblReduceSum =
-            LA.Table.reduce(
+        local testTblReduceSum = LA.Table.reduce(
             testTblReduce,
             function(accumulatedValue, currentValue)
                 return accumulatedValue + currentValue
@@ -121,10 +116,7 @@ local testsWereSuccessful =
                 testTblForEachAccumulatedValue = testTblForEachAccumulatedValue * value
             end
         )
-        assert(
-            testTblForEachAccumulatedValue == referenceTestTblForEach,
-            "Failed to forEach table to product of values"
-        )
+        assert(testTblForEachAccumulatedValue == referenceTestTblForEach,"Failed to forEach table to product of values")
 
         print("Testing LA.Table.includes")
         local referenceTestTblIncludesOne = "a"
@@ -135,8 +127,7 @@ local testsWereSuccessful =
 
         print("Testing LA.Table.find")
         local referenceTestTblFindValue = "world"
-        local testTblFindValue =
-            LA.Table.find(
+        local testTblFindValue = LA.Table.find(
             testTbl,
             function(value)
                 return value == referenceTestTblFindValue
@@ -157,8 +148,7 @@ local testsWereSuccessful =
 
         print("Testing LA.Utility.switch")
         local referenceSwitchReturnValue = "y"
-        local testSwitchReturnValue =
-            LA.Utility.switch(
+        local testSwitchReturnValue = LA.Utility.switch(
             "test_2",
             {
                 ["test_1"] = function()
@@ -176,10 +166,7 @@ local testsWereSuccessful =
             },
             true
         )
-        assert(
-            testSwitchReturnValue == referenceSwitchReturnValue,
-            "Failed to return proper value from switch function"
-        )
+        assert(testSwitchReturnValue == referenceSwitchReturnValue,"Failed to return proper value from switch function")
 
         print("Testing LA.Utility.CreateInstance")
         local TestInstance = LA.Utility.CreateInstance("Folder", "TestFolder", true)
@@ -283,7 +270,50 @@ local testsWereSuccessful =
         assert(random2 >= -5 and random2 <= 5, "Failed: Random value not within the specified range")
 
         print("Tests passed for LA.Integer")
-    end
-)
+
+        --------------------------------------------------------------------------------------------------------------------------------
+        -- Testing Color
+        --------------------------------------------------------------------------------------------------------------------------------
+
+        print("Testing Color")
+
+        local red, green, blue = 255, 0, 0
+        local hue, saturation, value = 0, 1, 1
+        local htmlColorCode = "#FF0000"
+
+        print("Testing Color.rgbToHsv")
+        local calculatedHue, calculatedSaturation, calculatedValue = LA.Color.rgbToHsv(red, green, blue)
+        assert(calculatedHue == hue, "Failed to convert RGB to HSV - incorrect hue value")
+        assert(calculatedSaturation == saturation, "Failed to convert RGB to HSV - incorrect saturation value")
+        assert(calculatedValue == value, "Failed to convert RGB to HSV - incorrect value value")
+
+        print("Testing Color.rgbToHtml")
+        local calculatedHtmlColorCode = LA.Color.rgbToHtml(red, green, blue)
+        assert(calculatedHtmlColorCode == htmlColorCode, "Failed to convert RGB to HTML color code")
+
+        print("Testing Color.hsvToRgb")
+        local calculatedRed, calculatedGreen, calculatedBlue = LA.Color.hsvToRgb(hue, saturation, value)
+        assert(calculatedRed == red, "Failed to convert HSV to RGB - incorrect red value")
+        assert(calculatedGreen == green, "Failed to convert HSV to RGB - incorrect green value")
+        assert(calculatedBlue == blue, "Failed to convert HSV to RGB - incorrect blue value")
+
+        print("Testing Color.hsvToHtml")
+        local calculatedHtmlColorCode = LA.Color.hsvToHtml(hue, saturation, value)
+        assert(calculatedHtmlColorCode == htmlColorCode, "Failed to convert HSV to HTML color code")
+
+        print("Testing Color.htmlToRgb")
+        local calculatedRed, calculatedGreen, calculatedBlue = LA.Color.htmlToRgb(htmlColorCode)
+        assert(calculatedRed == red, "Failed to convert HTML color code to RGB - incorrect red value")
+        assert(calculatedGreen == green, "Failed to convert HTML color code to RGB - incorrect green value")
+        assert(calculatedBlue == blue, "Failed to convert HTML color code to RGB - incorrect blue value")
+
+        print("Testing Color.htmlToHsv")
+        local calculatedHue, calculatedSaturation, calculatedValue = LA.Color.htmlToHsv(htmlColorCode)
+        assert(calculatedHue == hue, "Failed to convert HTML color code to HSV - incorrect hue value")
+        assert(calculatedSaturation == saturation,"Failed to convert HTML color code to HSV - incorrect saturation value")
+        assert(calculatedValue == value, "Failed to convert HTML color code to HSV - incorrect value value")
+
+        print("Tests passed for Color")
+end)
 
 return testsWereSuccessful -- true | false
