@@ -82,15 +82,12 @@ print('this isn\'t affected by the error above')
 
 To test this library, you must require the tests module from the **manual installation** above.
 ```lua
--- some script
 local luaAdditionsFolder = game.Workspace:WaitForChild('lua-additions')
 local luaAdditionsTestsFolder = luaAdditionsFolder:WaitForChild('tests')
-local luaAdditionsTestsFolderScript = luaAdditionsTestsFolder:WaitForChild('tests')
-local luaAdditionsTestsWereSuccessful = require(luaAdditionsTestsFolderScript)
+local luaAdditionsTestsFolderScript = luaAdditionsTestsFolder:WaitForChild('MainModule')
 
-print('luaAdditionsTestsWereSuccessful:', luaAdditionsTestsWereSuccessful)
-
--- luaAdditionsTestsWereSuccessful: true
+-- run the tests
+require(luaAdditionsTestsFolderScript)
 ```
 Any errors will be shown in the console.  
 Any PRs that improve the test coverage of the library will be appreciated.
