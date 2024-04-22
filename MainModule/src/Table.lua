@@ -264,7 +264,6 @@ function Table.prepend(tbl, tableToPrepend)
 end
 
 --- Appends the values from tableToAppend into tbl
---- @warning (this method mutates the original table)
 --- @param tbl table
 --- @param tableToAppend table
 --- @returns tbl table
@@ -274,6 +273,31 @@ function Table.append(tbl, tableToAppend)
     end
 
     return tbl
+end
+
+--- Compares tableToAppend to tbl to check if they both contain the same indexes and values
+--- @warning (this method mutates the original table)
+--- @param tbl table
+--- @param tableToCompare table
+--- @returns boolean
+function Table.compare(tbl, tableToCompare)
+    if #tbl ~= #tableToCompare then
+        return false
+    end
+    
+    for key, value in pairs(tbl) do
+        if type(value) == "table" then
+            if not Table.compare(value, tableToCompare[key]) then
+                return false
+            end
+        else
+            if value ~= tableToCompare[key] then
+                return false
+            end
+        end
+    end
+
+    return true
 end
 
 --------------------------------------------------------------------------------------------------------------------------------
