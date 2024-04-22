@@ -264,6 +264,7 @@ function Table.prepend(tbl, tableToPrepend)
 end
 
 --- Appends the values from tableToAppend into tbl
+--- @warning (this method mutates the original table)
 --- @param tbl table
 --- @param tableToAppend table
 --- @returns tbl table
@@ -276,7 +277,6 @@ function Table.append(tbl, tableToAppend)
 end
 
 --- Compares tableToAppend to tbl to check if they both contain the same indexes and values
---- @warning (this method mutates the original table)
 --- @param tbl table
 --- @param tableToCompare table
 --- @returns boolean
