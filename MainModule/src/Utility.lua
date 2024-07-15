@@ -64,6 +64,26 @@ function Utility.try(func)
     return t
 end
 
+--- Implements a batched validation function for checking conditions
+--- @param table table of items that you want to check
+--- @param expected the expected value of all the ietms in the table
+--- @returns Boolean The result of if all the items in the table are equal to the expected result
+function Utility.validate(table, expected)
+    if type(table) ~= 'table' then
+        error('LA.Utility.validate: table must be a table')
+    end
+    
+    local result = true
+
+    for _,item in pairs(table) do
+        if item ~= expected then
+            return false
+        end
+    end
+    
+    return true
+end
+
 --------------------------------------------------------------------------------------------------------------------------------
 
 return Utility
